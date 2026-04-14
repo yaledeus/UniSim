@@ -172,11 +172,8 @@ class GeomBM(nn.Module):
                                         edge_index=edge_index, edge_weight=edge_weight, edge_vec=edge_vec,
                                         rescale=False)
 
-        lamda = 5.0
-        loss_vel = lamda * F.mse_loss(vel_pred[mask], vel_gt[mask] * self.vel_scale, reduction='mean')
+        loss_vel = F.mse_loss(vel_pred[mask], vel_gt[mask] * self.vel_scale, reduction='mean')
         loss_den = F.mse_loss(den_pred[mask], den_gt[mask], reduction='mean')
-        loss_lig = 0
-        # loss_lig = lamda * F.mse_loss(vel_pred[edge_mask == 1], vel_gt[edge_mask == 1] * self.vel_scale, reduction='mean')
         loss_aux = 0
 
         same_abid = abid.unsqueeze(-1).repeat(1, abid.shape[0])
@@ -197,7 +194,7 @@ class GeomBM(nn.Module):
         valid_mask1 = (D1 > 0.0) & (D1 < 6.0) & same_abid & same_mask
         loss_aux += t * F.mse_loss(pred_D1[valid_mask1], D1[valid_mask1], reduction='mean')
         
-        loss = 1.0 * loss_vel + 1.0 * loss_den + 1.0 * loss_lig + 0.25 * loss_aux
+        loss = 1.0 * loss_vel + 1.0 * loss_den + 0.25 * loss_aux
 
         return loss, (loss_vel, loss_den, loss_lig, loss_aux)
 
