@@ -195,7 +195,7 @@ class GeomBM(nn.Module):
         
         loss = 1.0 * loss_vel + 1.0 * loss_den + 0.25 * loss_aux
 
-        return loss, (loss_vel, loss_den, loss_lig, loss_aux)
+        return loss, (loss_vel, loss_den, loss_aux)
 
     def forward(self, z, x, batch, t, edge_index, edge_weight, edge_vec, rescale=False):
         h, vec = self.encoder(z=z, x=x, batch=batch, t=t, edge_index=edge_index, edge_weight=edge_weight, edge_vec=edge_vec)
