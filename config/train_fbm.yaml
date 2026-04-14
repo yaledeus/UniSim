@@ -6,7 +6,7 @@ data:
   max_batches: 50_000
   path:
     pepmd_train: ./dataset/PepMD/train
-    pepmd_valid: .//dataset/PepMD/valid
+    pepmd_valid: ./dataset/PepMD/valid
     # atlas_train: ./dataset/ATLAS/train
     # atlas_valid: ./dataset/ATLAS/valid
     # md17_train: ./dataset/md17/train

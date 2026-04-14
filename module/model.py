@@ -138,7 +138,6 @@ class GeomBM(nn.Module):
         self.vel_ffn = ParamGVPFFNLayer(self.hidden_dim, ffn_dim, vector_norm=True)
         self.den_ffn = ParamGVPFFNLayer(self.hidden_dim, ffn_dim, vector_norm=True)
 
-        # dt=10ps: 1.0-1.5, dt=100ps: 0.5
         self.vel_scale = 0.5
 
     def adj_noise(self, temp):
